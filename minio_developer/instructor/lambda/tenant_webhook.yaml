@@ -1,0 +1,34 @@
+apiVersion: minio.min.io/v2
+kind: Tenant
+metadata:
+  labels:
+    app: minio
+  name: myminio
+  namespace: minio-tenant
+spec:
+  configuration:
+    name: storage-configuration
+  image: quay.io/minio/minio:RELEASE.2024-08-17T01-24-54Z
+  mountPath: /export
+  pools:
+  - name: pool-0
+    servers: 2
+    volumeClaimTemplate:
+      apiVersion: v1
+      kind: persistentvolumeclaims
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: standard
+    volumesPerServer: 2
+  requestAutoCert: false
+  users:
+  - name: storage-user
+  env:
+  - name: MINIO_LAMBDA_WEBHOOK_ENABLE
+    value: "on"
+  - name: MINIO_LAMBDA_WEBHOOK_ENDPOINT
+    value: "http://transform-service:5000/transform_uppercase"

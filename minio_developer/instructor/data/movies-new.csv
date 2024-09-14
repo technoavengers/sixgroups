@@ -1,0 +1,26 @@
+[	{
+		"_id": "Titanic_2001",
+		"name":"Titanic",
+		"year":2001,
+	    "genre": ["romantic","drama"],
+		"rating":4,
+		"description" : "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic"
+	},
+	{
+		"_id":"Sunshine_2009",
+		"name":"Sunshine",
+		"year":2004,
+		"genre": ["sci-fi","thriller"],
+		"rating":3.5,
+		"description" : "A team of international astronauts are sent on a dangerous mission to reignite the dying Sun with a nuclear fission bomb in 2057."
+	},
+	{
+		"_id": "Forest_2005",
+		"name":"Forest Gump",
+		"year":2005,
+		"genre": ["drama","crime","thriller"],
+		"rating":3,
+		"description": "A team of international astronauts are sent on a dangerous mission to reignite the dying Sun with a nuclear fission bomb in 2057."
+	}
+
+]

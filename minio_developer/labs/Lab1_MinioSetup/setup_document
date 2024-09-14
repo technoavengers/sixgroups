@@ -1,0 +1,27 @@
+# Start MiniKube with 4 cpu and 8GB memory
+minikube start --cpus 4 --memory 8192 
+
+# Apply MinIO Operator
+kubectl apply -k "github.com/minio/operator?ref=v6.0.2"
+
+# Check for MinIO Operator
+kubectl get all -n minio-operator
+
+# Apply tenant.yaml file
+kubectl apply -f tenant.yaml
+
+# Check for tenant
+kubectl get tenant -n minio-tenant
+
+# Check for all resources
+kubectl get all -n minio-tenant
+
+# Open new terminal and Expose minio console service running on port 9090
+kubectl port-forward svc/myminio-console 9090 -n minio-tenant
+
+# Open browser & check for localhost:9090
+username - minio
+password - minio123
+
+# For python sdk, Open new terminal and Expose minio headless service running on port 9000
+kubectl port-forward svc/myminio-hl  9000 -n minio-tenant

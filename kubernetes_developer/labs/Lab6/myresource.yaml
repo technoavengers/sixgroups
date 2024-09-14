@@ -1,0 +1,6 @@
+apiVersion: mydomain.com/v1
+kind: MyResource
+metadata:
+  name: example-myresource
+spec:
+  field1: "This is a test"
