@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-bucket-job
+  namespace: minio-tenant
+spec:
+  template:
+    spec:
+      containers:
+      - name: create-bucket
+        image: minio/mc:latest
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            while ! mc alias set myminio http://myminio-hl.minio-tenant.svc.cluster.local:9000 minio minio123; do
+              echo "Waiting for MinIO to be ready..."
+              sleep 5
+            done;
+            mc mb myminio/lakehouse/db;
+            exit 0;
+        env:
+        - name: MINIO_ROOT_USER
+          value: "minio"
+        - name: MINIO_ROOT_PASSWORD
+          value: "minio123"
+      restartPolicy: OnFailure
+  backoffLimit: 5

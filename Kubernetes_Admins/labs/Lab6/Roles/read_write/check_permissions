@@ -1,0 +1,5 @@
+kubectl auth can-i get pods --as minio-user -n minio-rbac
+kubectl auth can-i create services --as minio-user -n minio-rbac
+kubectl auth can-i delete statefulsets --as minio-user -n minio-rbac
+
+kubectl auth can-i get pods --as minio-user 

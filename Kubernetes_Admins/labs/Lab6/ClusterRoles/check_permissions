@@ -1,0 +1,2 @@
+kubectl auth can-i get statefulsets --as minio-cluster-admin --all-namespaces
+kubectl auth can-i create services --as minio-cluster-admin --all-namespaces

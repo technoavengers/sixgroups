@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: logs-viewer-binding
+  namespace: minio-rbac
+subjects:
+- kind: User
+  name: minio-logs-user
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: logs-viewer
+  apiGroup: rbac.authorization.k8s.io

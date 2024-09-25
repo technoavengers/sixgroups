@@ -1,0 +1,41 @@
+helm repo add hashicorp https://helm.releases.hashicorp.com
+
+helm install vault hashicorp/vault --set "global.kmsSecretName=kms-vault-secret" -n minio-tenant
+
+kubectl exec -it vault-0 -n minio-tenant -- vault operator init
+
+
+
+kubectl exec -it vault-0 -n minio-tenant -- vault operator unseal SP2iNzozQkyKAgheknRG8saGCoi3FRWe0EWnLqERCmLk
+
+
+
+kubectl exec -it vault-0 -n minio-tenant -- vault operator unseal QZxBPh+wigWuIPp8fWdulvey5uZLAYmi/ALCe8lFUZBA
+
+
+
+kubectl exec -it vault-0 -n minio-tenant -- vault operator unseal Nh50cpkA/Z4/R5YitTR6U1BEvhMYq98obCNeIOzK25nd
+
+
+
+kubectl exec -it vault-0 -n minio-tenant -- vault status
+
+
+
+kubectl exec -it vault-0 -n minio-tenant vault login hvs.REPLACE_WITH_YOUR_VAULT_TOKEN
+
+
+
+kubectl exec -it vault-0 -n minio-tenant  vault token capabilities hvs.REPLACE_WITH_YOUR_VAULT_TOKEN sys/mounts/transit
+
+
+
+kubectl exec -it vault-0 -n minio-tenant vault secrets enable transit
+
+
+
+kubectl exec -it vault-0 -n minio-tenant -- vault write -f transit/keys/minio-key
+
+
+
+kubectl create secret generic kms-vault-secret -n minio-tenant --from-literal=token=hvs.REPLACE_WITH_YOUR_VAULT_TOKEN

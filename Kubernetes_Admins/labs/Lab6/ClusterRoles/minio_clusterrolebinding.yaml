@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: minio-cluster-manager-binding
+subjects:
+- kind: User
+  name: minio-cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: minio-cluster-manager
+  apiGroup: rbac.authorization.k8s.io
